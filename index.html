@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Test</title>
+		<script type="text/javascript" src="js/base64.js"></script>
+		<script src="js/crypto-js-3.1.5/crypto-js.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/url.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function testupload() {
+				$("#upload-form").ajaxSubmit({
+					type: 'post',
+					url: makeRequestUrl(),
+					success: function(data) {
+						alert("success");
+						$("#upload-form").resetForm();
+						console.log(data)
+//						data = eval(data);
+//						console.log(data.data)
+						var dataRet = jQuery.parseJSON(data);
+						var imageurl = dataRet.data.download_url;
+						$("#img").attr("src",imageurl);
+						$("#img").attr("style","display:block");
+						
+					},
+					error: function(XmlHttpRequest, textStatus, errorThrown) {
+						alert("error");
+					}
+				});
+			}
+		</script>
+	</head>
+
+	<body>
+		<form id="upload-form" action="#upload-form" method="post" enctype="multipart/form-data">
+			<input type="file" name="filecontent" id="filecontent" value="" />
+			<input type="button" value="上传" onclick="testupload()" />
+		</form>
+		<img src="#" id="img" hidden="block"/>
+	</body>
+
+</html>
