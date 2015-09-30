@@ -17,6 +17,8 @@
 						alert("success");
 						$("#upload-form").resetForm();
 						console.log(data)
+//						data = eval(data);
+//						console.log(data.data)
 						var dataRet = jQuery.parseJSON(data);
 						var imageurl = dataRet.data.download_url;
 						$("#img").attr("src",imageurl);
@@ -24,7 +26,7 @@
 						
 					},
 					error: function(XmlHttpRequest, textStatus, errorThrown) {
-						alert("error");
+						alert(textStatus);
 					}
 				});
 			}
